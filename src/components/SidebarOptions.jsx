@@ -1,10 +1,18 @@
 import styled from "styled-components";
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
 import { db } from "../firebase";
 
 // eslint-disable-next-line react/prop-types
 const SidebarOptions = ({Icon,title,addChannelOption}) => {
+  const [value, loading, error] = useCollection(
+    collection(db, 'rooms'),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    }
+  );
+  console.log(value)
   const addChannel=async()=>{
     const channelName = prompt("Enter the Channel Name");
     const timeStamp = serverTimestamp()
