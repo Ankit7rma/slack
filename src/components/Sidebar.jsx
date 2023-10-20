@@ -2,6 +2,18 @@ import styled from "styled-components"
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import CreateIcon from '@mui/icons-material/Create';
 import SidebarOptions from "./SidebarOptions";
+import InsertCommentIcon from "@mui/icons-material/InsertComment";
+import InboxIcon from "@mui/icons-material/Inbox";
+import DraftsIcon from "@mui/icons-material/Drafts";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import AppsIcon from "@mui/icons-material/Apps";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddIcon from '@mui/icons-material/Add';
+
+
 
 const Sidebar = () => {
   return (
@@ -14,11 +26,19 @@ const Sidebar = () => {
         </SidebarInfo>
         <CreateIcon/>
     </SidebarHeader>
-    <SidebarOptions top={true} addChannel={false}/>
+    <SidebarOptions Icon={InsertCommentIcon} title="Threads"/>
+    <SidebarOptions Icon={InboxIcon} title="Mentions&Reactions"/>
+    <SidebarOptions Icon={DraftsIcon} title="Saved items"/>
+    <SidebarOptions Icon={BookmarkIcon} title="Channel Browser"/>
+    <SidebarOptions Icon={PeopleAltIcon} title="People & User"/>
+    <SidebarOptions Icon={AppsIcon} title="Apps"/>
+    <SidebarOptions Icon={FileCopyIcon} title="File Browser"/>
+    <SidebarOptions Icon={ExpandLessIcon} title="Show less"/>
     <hr/>
-    {/* <SidebarOptions top={false}  addChannel={false}/> */}
-    {/* <hr/> */}
-    <SidebarOptions top={false}  addChannel={true}/>
+    <SidebarOptions Icon={ExpandMoreIcon} title="Channels"/>
+    <hr/>
+    <SidebarOptions Icon={AddIcon} addChannelOption title="Add Channels"/>
+   
     </SidebarContainer>
   )
 }
@@ -33,6 +53,10 @@ color: white;
 border-top: 1px solid #49274b;
 padding-top: 60px;
 max-width: 260px;
+>hr{
+    margin-top: 10px;
+    border: 1px solid #49274b;
+}
 `
 
 const SidebarHeader = styled.div`
