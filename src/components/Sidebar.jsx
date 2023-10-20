@@ -14,7 +14,11 @@ const Sidebar = () => {
         </SidebarInfo>
         <CreateIcon/>
     </SidebarHeader>
-    <SidebarOptions/>
+    <SidebarOptions top={true} addChannel={false}/>
+    <hr/>
+    {/* <SidebarOptions top={false}  addChannel={false}/> */}
+    {/* <hr/> */}
+    <SidebarOptions top={false}  addChannel={true}/>
     </SidebarContainer>
   )
 }
