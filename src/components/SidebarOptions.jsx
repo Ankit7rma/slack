@@ -12,6 +12,15 @@ const SidebarOptions = ({Icon,title,addChannelOption}) => {
       snapshotListenOptions: { includeMetadataChanges: true },
     }
   );
+   
+  // Now you can access the data, loading, and error
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
   console.log(value)
   const addChannel=async()=>{
     const channelName = prompt("Enter the Channel Name");
