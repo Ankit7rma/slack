@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
 import { db } from "../firebase";
 
 // eslint-disable-next-line react/prop-types
 const SidebarOptions = ({Icon,title,addChannelOption}) => {
   const addChannel=async()=>{
     const channelName = prompt("Enter the Channel Name");
+    const timeStamp = serverTimestamp()
     
       if(channelName){const docRef = await addDoc(collection(db, "rooms"), {
-        name:channelName
+        name:channelName,
+        timeStamp
       });}
     
     
