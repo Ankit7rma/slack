@@ -1,7 +1,8 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import {RouterProvider, createBrowserRouter } from "react-router-dom"
 import Home from "./components/Home"
 import Header from "./components/Header"
 import styled from "styled-components"
+import Sidebar from "./components/Sidebar"
 
 
 
@@ -17,10 +18,9 @@ function App() {
     <>
     <Header/>
     <AppBody>
-Hello
-   
-    
-    </AppBody>
+    <Sidebar/>
+    <RouterProvider router={appRouter}/>
+     </AppBody>
     </>
       
   )
@@ -29,6 +29,7 @@ Hello
 export default App
 
 const AppBody = styled.div`
-font: 600;
+display: flex;
+height: 100vh;
 
 `
