@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useCollection } from 'react-firebase-hooks/firestore';
 
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
 import { db } from "../firebase";
@@ -11,6 +10,7 @@ const SidebarOptions = ({Icon,title,addChannelOption, id}) => {
     const channelName = prompt("Enter the Channel Name");
     const timeStamp = serverTimestamp()
     
+      // eslint-disable-next-line no-unused-vars
       if(channelName){const docRef = await addDoc(collection(db, "rooms"), {
         name:channelName,
         timeStamp
