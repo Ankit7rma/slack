@@ -13,9 +13,30 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 
+import { useCollection } from 'react-firebase-hooks/firestore';
+
+import { collection} from "firebase/firestore"; 
+import { db } from "../firebase";
+
 
 
 const Sidebar = () => {
+    const [channels, loading, error] = useCollection(
+        collection(db, 'rooms'),
+        {
+          snapshotListenOptions: { includeMetadataChanges: true },
+        }
+      );
+       
+      // Now you can access the data, loading, and error
+      if (loading) {
+        return <p>Loading...</p>;
+      }
+    
+      if (error) {
+        return <p>Error: {error.message}</p>;
+      }
+      
   return (
     <SidebarContainer>
     <SidebarHeader>
@@ -38,7 +59,14 @@ const Sidebar = () => {
     <SidebarOptions Icon={ExpandMoreIcon} title="Channels"/>
     <hr/>
     <SidebarOptions Icon={AddIcon} addChannelOption title="Add Channels"/>
-   
+   {channels?.docs.map((doc)=>(
+    <SidebarOptions 
+    key={doc.id}
+    id={doc.id}
+    title={doc.data().name}/>
+   )) }
+
+    
     </SidebarContainer>
   )
 }

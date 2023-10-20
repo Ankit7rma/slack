@@ -5,23 +5,8 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 
 // eslint-disable-next-line react/prop-types
-const SidebarOptions = ({Icon,title,addChannelOption}) => {
-  const [value, loading, error] = useCollection(
-    collection(db, 'rooms'),
-    {
-      snapshotListenOptions: { includeMetadataChanges: true },
-    }
-  );
-   
-  // Now you can access the data, loading, and error
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
-  console.log(value)
+const SidebarOptions = ({Icon,title,addChannelOption, id}) => {
+ 
   const addChannel=async()=>{
     const channelName = prompt("Enter the Channel Name");
     const timeStamp = serverTimestamp()
@@ -64,6 +49,8 @@ cursor: pointer;
 }
 `
 
-const SidebarOptionChannel = styled.div`
+const SidebarOptionChannel = styled.h3`
+padding: 10px 0;
+font-weight: 400;
 
 `
