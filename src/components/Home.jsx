@@ -1,9 +1,8 @@
-import Header from "./Header"
 
 const Home = () => {
   return (
     <div>
-    <Header/>
+    Home
     </div>
   )
 }
