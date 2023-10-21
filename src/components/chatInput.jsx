@@ -1,13 +1,23 @@
+import { useRef, useState } from "react";
 import styled from "styled-components";
 
 const ChatInput = ({channelName,channelId}) => {
-    const sendMessage = (e)=>{
+  const [input,setInput] = useState("")  
+  const sendMessage = (e)=>{
         e.preventDefault();
+
+        if(!channelId){
+          return false
+        }
+        setInput("");
     }
+    console.log(input)
   return (
     <ChatInputContainer>
     <form>
-        <input placeholder={`Message #Room`}/>
+        <input value={input}  
+        onChange={(e)=>setInput(e.target.value)}
+        placeholder={`Message #Room`}/>
         <button hidden type="submit" onClick={sendMessage}>
             Send
         </button>
@@ -18,4 +28,23 @@ const ChatInput = ({channelName,channelId}) => {
 
 export default ChatInput;
 
-const ChatInputContainer = styled.div``
+const ChatInputContainer = styled.div`
+border-radius: 20px;
+margin-left: 10px;
+>form{
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+>form>input{
+  position: fixed;
+  bottom: 30px;
+  width: 60%;
+  border: 1px solid gray;
+  border-radius: 3px;
+  outline: none;
+  padding: 10px;
+  font-size: 20px;
+}
+
+`

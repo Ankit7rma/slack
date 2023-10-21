@@ -47,6 +47,8 @@ overflow-y: scroll;
 flex-grow: 1;
 /* flex: 0.7; */
 width: 100%;
+display: flex;
+flex-direction: column;
 `
 const Header = styled.div`
 display: flex;
