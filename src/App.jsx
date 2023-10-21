@@ -4,7 +4,7 @@ import Header from "./components/Header"
 import styled from "styled-components"
 import Sidebar from "./components/Sidebar"
 import { Provider } from "react-redux"
-import store from "./components/store/Store"
+import appStore from "./components/store/Store"
 
 
 
@@ -17,14 +17,15 @@ function App() {
   ])
 
   return (
-    <Provider store={store}>
+    <>
+    <Provider store={appStore}>
     <Header/>
     <AppBody>
     <Sidebar/>
     <RouterProvider router={appRouter}/>
      </AppBody>
     </Provider>
-      
+    </>
   )
 }
 

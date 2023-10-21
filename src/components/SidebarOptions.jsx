@@ -2,9 +2,11 @@ import styled from "styled-components";
 
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
 import { db } from "../firebase";
+import { useDispatch } from "react-redux";
 
 // eslint-disable-next-line react/prop-types
 const SidebarOptions = ({Icon,title,addChannelOption, id}) => {
+  const dispatch = useDispatch()
  
   const addChannel=async()=>{
     const channelName = prompt("Enter the Channel Name");
