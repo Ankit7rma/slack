@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
 import { db } from "../firebase";
 import { useDispatch } from "react-redux";
+import { enterRoom } from "./features/appSlice";
 
 // eslint-disable-next-line react/prop-types
 const SidebarOptions = ({Icon,title,addChannelOption, id}) => {
@@ -20,7 +21,13 @@ const SidebarOptions = ({Icon,title,addChannelOption, id}) => {
     
     
   };
-  const selectChannel=()=>{};
+  const selectChannel=()=>{
+    if(id){
+      dispatch(enterRoom({
+        roomId:id
+      }))
+    }
+  };
   return (
     <SidebarOptionContainer  onClick={addChannelOption ? addChannel : selectChannel }>
     {Icon && <Icon />}
@@ -54,5 +61,9 @@ cursor: pointer;
 const SidebarOptionChannel = styled.h3`
 padding: 10px 0;
 font-weight: 400;
+>span{
+  margin-right:5px ;
+  margin-left:5px ;
+}
 
 `

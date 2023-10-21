@@ -1,10 +1,10 @@
 import {RouterProvider, createBrowserRouter } from "react-router-dom"
-import Home from "./components/Home"
 import Header from "./components/Header"
 import styled from "styled-components"
 import Sidebar from "./components/Sidebar"
 import { Provider } from "react-redux"
 import appStore from "./components/store/Store"
+import Chat from "./components/Chat"
 
 
 
@@ -12,7 +12,7 @@ function App() {
   const appRouter = createBrowserRouter([
     {
       path:"/",
-      element:<Home/>,
+      element:<Chat/>,
     }
   ])
 

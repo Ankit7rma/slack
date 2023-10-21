@@ -23,9 +23,9 @@ import { db } from "../firebase";
 const Sidebar = () => {
     const [channels, loading, error] = useCollection(
         collection(db, 'rooms'),
-        {
-          snapshotListenOptions: { includeMetadataChanges: true },
-        }
+        // {
+        //   snapshotListenOptions: { includeMetadataChanges: true },
+        // }
       );
        
       // Now you can access the data, loading, and error
