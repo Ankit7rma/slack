@@ -4,9 +4,44 @@ import InfoIcon from '@mui/icons-material/Info';
 import { useSelector } from "react-redux";
 import { selectRoomId } from "./features/appSlice";
 import ChatInput from "./ChatInput";
+import { useCollection, useDocument } from "react-firebase-hooks/firestore";
+import { collection, doc, orderBy, query } from "firebase/firestore";
+import { db } from "../firebase";
 
 const Home = () => {
-  const roomId = useSelector(selectRoomId)
+  // const roomId = useSelector(selectRoomId)
+  // const [roomDetails] = useDocument(roomId&& db.collection("rooms").doc(roomId);
+  // const [roomMessages] = useCollection(
+  //   roomId && 
+  //   db.collection("rooms").doc(roomId)
+  //   .collection("messages")
+  //   .orderBy("timestamp","asc")
+  // )
+  // Use the roomId from your Redux store
+const roomId = useSelector(selectRoomId);
+
+// Use the Firestore hooks to fetch room details and messages
+const roomRef = roomId && doc(collection(db, 'rooms'), roomId);
+const messagesQuery =
+  roomId &&
+  query(
+    collection(doc(collection(db, 'rooms'), roomId), 'messages'),
+    orderBy('timestamp', 'asc')
+  );
+
+const [roomDetails, loadingRoomDetails, errorRoomDetails] = useDocument(roomRef);
+const [roomMessages, loadingRoomMessages, errorRoomMessages] = useCollection(messagesQuery);
+
+// Check if loading or error occurred
+if (loadingRoomDetails || loadingRoomMessages) {
+  return <p>Loading...</p>; // Replace with your loading indicator
+}
+
+if (errorRoomDetails || errorRoomMessages) {
+  return <p>Error loading data</p>; // Replace with your error handling
+}
+  
+  
   return (
     <ChatContainer>
     <>
@@ -48,6 +83,7 @@ flex-grow: 1;
 /* flex: 0.7; */
 width: 100%;
 display: flex;
+flex: 0.9;
 flex-direction: column;
 `
 const Header = styled.div`

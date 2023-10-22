@@ -14,7 +14,7 @@ const SidebarOptions = ({Icon,title,addChannelOption, id}) => {
     const timeStamp = serverTimestamp()
     
       // eslint-disable-next-line no-unused-vars
-      if(channelName){const docRef = await addDoc(collection(db, "rooms"), {
+      if(channelName){const docRef = await addDoc(collection(db, "rooms") , {
         name:channelName,
         timeStamp
       });}
