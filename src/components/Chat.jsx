@@ -7,6 +7,7 @@ import ChatInput from "./ChatInput";
 import { useCollection, useDocument } from "react-firebase-hooks/firestore";
 import { collection, doc, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
+import Message from "./Message";
 
 const Home = () => {
   // const roomId = useSelector(selectRoomId)
@@ -29,17 +30,17 @@ const messagesQuery =
     orderBy('timestamp', 'asc')
   );
 
-const [roomDetails, loadingRoomDetails, errorRoomDetails] = useDocument(roomRef);
-const [roomMessages, loadingRoomMessages, errorRoomMessages] = useCollection(messagesQuery);
+const [roomDetails] = useDocument(roomRef);
+const [roomMessages] = useCollection(messagesQuery);
 
-// Check if loading or error occurred
-if (loadingRoomDetails || loadingRoomMessages) {
-  return <p>Loading...</p>; // Replace with your loading indicator
-}
+// // Check if loading or error occurred
+// if (loadingRoomDetails || loadingRoomMessages) {
+//   return <p>Loading...</p>; // Replace with your loading indicator
+// }
 
-if (errorRoomDetails || errorRoomMessages) {
-  return <p>Error loading data</p>; // Replace with your error handling
-}
+// if (errorRoomDetails || errorRoomMessages) {
+//   return <p>Error loading data</p>; // Replace with your error handling
+// }
   
   
   return (
@@ -48,7 +49,7 @@ if (errorRoomDetails || errorRoomMessages) {
     <Header>
       <HeaderLeft>
         <h4>
-          <strong>#Room-Name</strong>
+          <strong>#{roomDetails?.data().name}</strong>
         </h4>
         <StarBorderIcon/>
       </HeaderLeft>
@@ -59,11 +60,22 @@ if (errorRoomDetails || errorRoomMessages) {
       </HeaderRight>
     </Header>
     <ChatMessages>
-      {/* chat messages */}
+      {roomMessages?.docs.map((doc)=>{
+        const {message,timestamp,user,userImage} = doc.data();
+        return (
+          <Message
+          key={doc.id}
+          message={message}
+          timestamp={timestamp}
+          user={user}
+          userImage={userImage}
+          />
+        )
+      })}
     </ChatMessages>
     <ChatInput
-     channelName
-      channelId={roomId}
+     channelName={roomDetails?.data().name}
+     channelId={roomId}
     />
     </>
     </ChatContainer>
@@ -80,10 +92,10 @@ const ChatContainer = styled.div`
 margin-top: 60px;
 overflow-y: scroll;
 flex-grow: 1;
-/* flex: 0.7; */
+flex: 0.7;
 width: 100%;
 display: flex;
-flex: 0.9;
+
 flex-direction: column;
 `
 const Header = styled.div`

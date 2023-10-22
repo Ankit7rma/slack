@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -12,7 +12,7 @@ const ChatInput = ({ channelName, channelId }) => {
 
     if (channelId) {
       //   db.collection("rooms").doc(channelId).collection("messages").add({
-      //     message:input,
+      //     message:input, 
       //     timestamp,
       //     user:"Ankit",
       //     userImage:"abcurl.com"
@@ -27,7 +27,7 @@ const ChatInput = ({ channelName, channelId }) => {
         message: input,
         timestamp: serverTimestamp(),
         user: "Ankit",
-        userImage: "abcurl.com",
+        userImage: "https://media.licdn.com/dms/image/C4D03AQEQPmT0Xa-79Q/profile-displayphoto-shrink_200_200/0/1656659445431?e=1703721600&v=beta&t=vuWCIRTM27deGnBFBwS3J4WkzJzVGP7jPFSogPCxSQs",
       };
 
       addDoc(messagesRef, newMessage)
@@ -49,7 +49,7 @@ const ChatInput = ({ channelName, channelId }) => {
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={`Message #Room`}
+          placeholder={`Message ${channelName}`}
         />
         <button hidden type="submit" onClick={sendMessage}>
           Send

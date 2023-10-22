@@ -9,7 +9,8 @@ import { enterRoom } from "./features/appSlice";
 const SidebarOptions = ({Icon,title,addChannelOption, id}) => {
   const dispatch = useDispatch()
  
-  const addChannel=async()=>{
+  const addChannel=async(e)=>{
+    e.preventDefault()
     const channelName = prompt("Enter the Channel Name");
     const timeStamp = serverTimestamp()
     
@@ -21,7 +22,8 @@ const SidebarOptions = ({Icon,title,addChannelOption, id}) => {
     
     
   };
-  const selectChannel=()=>{
+  const selectChannel=(e)=>{
+    e.preventDefault();
     if(id){
       dispatch(enterRoom({
         roomId:id
