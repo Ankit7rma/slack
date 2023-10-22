@@ -8,8 +8,10 @@ import { useCollection, useDocument } from "react-firebase-hooks/firestore";
 import { collection, doc, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 import Message from "./Message";
+import { useEffect, useRef } from "react";
 
 const Home = () => {
+  const chatRef = useRef(null)
   // const roomId = useSelector(selectRoomId)
   // const [roomDetails] = useDocument(roomId&& db.collection("rooms").doc(roomId);
   // const [roomMessages] = useCollection(
@@ -32,6 +34,12 @@ const messagesQuery =
 
 const [roomDetails] = useDocument(roomRef);
 const [roomMessages] = useCollection(messagesQuery);
+useEffect(()=>{
+  chatRef?.current?.scrollIntoView(
+    {behavior:"smooth"}
+  );
+
+},[roomId])
 
 // // Check if loading or error occurred
 // if (loadingRoomDetails || loadingRoomMessages) {
@@ -72,8 +80,10 @@ const [roomMessages] = useCollection(messagesQuery);
           />
         )
       })}
+      <ChatBottom ref={chatRef}/>
     </ChatMessages>
     <ChatInput
+    chatRef={chatRef}
      channelName={roomDetails?.data().name}
      channelId={roomId}
     />
@@ -84,6 +94,10 @@ const [roomMessages] = useCollection(messagesQuery);
 
 export default Home;
 
+const ChatBottom = styled.div`
+padding-bottom:20px;
+height: 70px;
+`
 const ChatMessages= styled.div``
 
 
@@ -92,7 +106,7 @@ const ChatContainer = styled.div`
 margin-top: 60px;
 overflow-y: scroll;
 flex-grow: 1;
-flex: 0.7;
+flex: 0%.8;
 width: 100%;
 display: flex;
 

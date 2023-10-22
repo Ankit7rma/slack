@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
-const ChatInput = ({ channelName, channelId }) => {
+const ChatInput = ({chatRef, channelName, channelId }) => {
   const [input, setInput] = useState("");
   const timestamp = serverTimestamp();
   const sendMessage = async (e) => {
@@ -40,6 +40,9 @@ const ChatInput = ({ channelName, channelId }) => {
     } else {
       return false;
     }
+    chatRef?.current?.scrollIntoView(
+      {behavior:"smooth"}
+    );
     setInput("");
   };
 
