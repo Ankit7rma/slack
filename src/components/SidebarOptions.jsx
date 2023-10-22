@@ -59,7 +59,7 @@ cursor: pointer;
 `
 
 const SidebarOptionChannel = styled.h3`
-padding: 10px 0;
+padding:5px;
 font-weight: 400;
 >span{
   margin-right:5px ;
