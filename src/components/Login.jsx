@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import { Button } from '@mui/material';
-
+import { auth,provider } from "../firebase";
+import { signInWithPopup } from "firebase/auth";
 
 
 const Login = () => {
     const signIn=(e)=>{
       e.preventDefault()
+      signInWithPopup(auth, provider)
+      .catch((error) => {
+
+        alert(error.message)
+      });
 
     }
   return (
