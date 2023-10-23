@@ -15,7 +15,7 @@ import  CubeGrid  from 'react-spinkit';
 
 function App() { 
   const [ user , loading ] = useAuthState(auth)
-  if(true){return(
+  if(loading){return(
     
     <AppLoading>
       <AppLoadingContents>
