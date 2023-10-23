@@ -16,11 +16,13 @@ import AddIcon from '@mui/icons-material/Add';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
 import { collection} from "firebase/firestore"; 
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 
 
 const Sidebar = () => {
+  const [user] = useAuthState(auth)
     const [channels, loading, error] = useCollection(
         collection(db, 'rooms'),
         // {

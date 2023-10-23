@@ -1,10 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const ChatInput = ({chatRef, channelName, channelId }) => {
   const [input, setInput] = useState("");
+  const [user] = useAuthState(auth)
   const timestamp = serverTimestamp();
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -26,8 +28,8 @@ const ChatInput = ({chatRef, channelName, channelId }) => {
       const newMessage = {
         message: input,
         timestamp: serverTimestamp(),
-        user: "Ankit",
-        userImage: "https://media.licdn.com/dms/image/C4D03AQEQPmT0Xa-79Q/profile-displayphoto-shrink_200_200/0/1656659445431?e=1703721600&v=beta&t=vuWCIRTM27deGnBFBwS3J4WkzJzVGP7jPFSogPCxSQs",
+        user:user?.displayName,
+        userImage:user?.photoURL,
       };
 
       addDoc(messagesRef, newMessage)
@@ -42,7 +44,7 @@ const ChatInput = ({chatRef, channelName, channelId }) => {
     }
     chatRef?.current?.scrollIntoView(
       {behavior:"smooth"}
-    );
+    ); 
     setInput("");
   };
 

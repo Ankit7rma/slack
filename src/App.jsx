@@ -8,11 +8,26 @@ import Chat from "./components/Chat"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "./firebase"
 import Login from "./components/Login"
+import { Spinner } from "react-spinkit"
 
 
 
-function App() {
-  const [ user , loading ] = useAuthState(auth)
+function App() { 
+  const [ user , loading,error ] = useAuthState(auth)
+  if(loading){
+    <AppLoading>
+      <AppLoadingContents>
+        <img src="" alt=""/>
+        <Spinner
+        name="CubeGrid"
+        color="purple"
+        fadeIn="none"
+        />
+      </AppLoadingContents>
+    </AppLoading>
+  }
+  
+  
   const appRouter = createBrowserRouter([
     {
       path:"/",
@@ -41,3 +56,6 @@ display: flex;
 height: 100vh;
 
 `
+
+const AppLoading = styled.div``
+const AppLoadingContents = styled.div``
