@@ -5,10 +5,14 @@ import Sidebar from "./components/Sidebar"
 import { Provider } from "react-redux"
 import appStore from "./components/store/Store"
 import Chat from "./components/Chat"
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from "./firebase"
+import Login from "./components/Login"
 
 
 
 function App() {
+  const [ user , loading ] = useAuthState(auth)
   const appRouter = createBrowserRouter([
     {
       path:"/",
@@ -19,11 +23,12 @@ function App() {
   return (
     <>
     <Provider store={appStore}>
-    <Header/>
+    {!user?(<Login/>):(<>
+      <Header/>
     <AppBody>
     <Sidebar/>
     <RouterProvider router={appRouter}/>
-     </AppBody>
+     </AppBody></>)}
     </Provider>
     </>
   )
