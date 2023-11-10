@@ -4,9 +4,10 @@ import { auth, db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const ChatInput = ({chatRef, channelName, channelId }) => {
+const ChatInput = (chatRef ,channelName, channelId ) => {
   const [input, setInput] = useState("");
   const [user] = useAuthState(auth)
+  // eslint-disable-next-line no-unused-vars
   const timestamp = serverTimestamp();
   const sendMessage = async (e) => {
     e.preventDefault();
